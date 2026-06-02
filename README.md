@@ -129,6 +129,8 @@ final class Trip {
 
 A real gotcha the skill caught that the slide glossed over: the session's snippet shows `FetchDescriptor(sortBy: SortDescriptor(...))`, but `sortBy:` actually takes an *array* — flagged in the brief and corrected in the demo.
 
+The full, unedited output of this run lives in [`examples/`](./examples) — read the complete [`brief.md`](./examples/wwdc2023-10187-meet-swiftdata/brief.md) and [`Demo.swift`](./examples/wwdc2023-10187-meet-swiftdata/Demo.swift).
+
 ## Limitations
 
 - **Demos aren't compiled.** There's no Xcode/Swift toolchain in the skill's environment, so generated Swift is a high-quality, ready-to-paste *starting point* — build it in Xcode. The skill says so explicitly and never claims otherwise.
@@ -144,9 +146,14 @@ wwdc-session-decoder/
 │   ├── session-types.md      # the 5-type classifier and routing rules
 │   ├── brief-template.md     # the triage header + per-type brief templates
 │   └── demo-guide.md         # when to build a demo + the Swift quality bar
+├── examples/                 # real, unedited sample output from the skill
+│   └── wwdc2023-10187-meet-swiftdata/
+│       ├── brief.md
+│       └── Demo.swift
 ├── evals/
 │   ├── evals.json            # output-quality test cases
 │   └── trigger-evals.json    # description-triggering test cases
+├── .gitignore
 ├── README.md
 └── LICENSE
 ```
