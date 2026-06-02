@@ -1,0 +1,17 @@
+{
+  "skill_name": "wwdc-session-decoder",
+  "evals": [
+    {
+      "id": 0,
+      "prompt": "Decode this WWDC session for me: https://developer.apple.com/videos/play/wwdc2023/10187/ — I'm an experienced iOS dev, give me the practical breakdown and code.",
+      "expected_output": "Type-1 (new API) brief: triage header with a real 'should you care' verdict, SwiftData mental model, key APIs (@Model, ModelContainer, ModelContext, @Query), gotchas, and a runnable Demo.swift that compiles in Xcode.",
+      "files": []
+    },
+    {
+      "id": 1,
+      "prompt": "Can you break down this WWDC talk? https://developer.apple.com/videos/play/wwdc2023/10072/",
+      "expected_output": "Type-4 (conceptual/design) brief: distilled spatial design principles with decision guidance and anti-patterns. NO Demo.swift — there is no API to run.",
+      "files": []
+    }
+  ]
+}

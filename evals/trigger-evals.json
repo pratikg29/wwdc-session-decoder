@@ -1,0 +1,23 @@
+[
+  {"query": "catch me up on session 10160", "should_trigger": true},
+  {"query": "https://developer.apple.com/videos/play/wwdc2024/10144/ break this down for me, I'm short on time", "should_trigger": true},
+  {"query": "decode the new SwiftData session from this year and show me the code", "should_trigger": true},
+  {"query": "whats actually new in the wwdc25 widgets session, do i need to change my existing widget code?", "should_trigger": true},
+  {"query": "give me the tl;dr and a runnable demo for the 'Meet the Foundation Models framework' talk", "should_trigger": true},
+  {"query": "explain wwdc2023-10187 like i'm already a senior ios dev — skip the basics", "should_trigger": true},
+  {"query": "is the 'Bring your app to CarPlay' WWDC session worth watching? what changed?", "should_trigger": true},
+  {"query": "paste: developer.apple.com/videos/play/wwdc2024/10160 — just show me the new APIs and gotchas", "should_trigger": true},
+  {"query": "make me a cheat sheet from the new App Intents session at dub dub this year", "should_trigger": true},
+  {"query": "I have like 40 wwdc videos bookmarked. for the one on observation, summarize it and tell me if it affects my app", "should_trigger": true},
+
+  {"query": "summarize this Google I/O talk about Android 15 background limits for me", "should_trigger": false},
+  {"query": "my therapist gave me homework after our session today, can you help me think through it", "should_trigger": false},
+  {"query": "debug why my express-session cookie isn't persisting across requests in node", "should_trigger": false},
+  {"query": "catch me up on what was decided in standup this morning from the slack thread", "should_trigger": false},
+  {"query": "what's new in React 19 — give me the migration notes", "should_trigger": false},
+  {"query": "explain how async/await actually works under the hood in Swift", "should_trigger": false},
+  {"query": "summarize this youtube video for me: https://youtu.be/dQw4w9WgXcQ", "should_trigger": false},
+  {"query": "break down my AWS bill for this month, it spiked and I don't know why", "should_trigger": false},
+  {"query": "I'm presenting a session at a local meetup next week, help me outline my talk on Combine", "should_trigger": false},
+  {"query": "read this Apple developer docs page on URLSession and explain retry behavior", "should_trigger": false}
+]
