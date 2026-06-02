@@ -25,6 +25,28 @@ Do **not** build a demo for:
 If you're unsure, ask: "would an experienced dev paste this and learn something the brief
 didn't already give them?" If no, skip it.
 
+## Build a real use-case, not a snippet dump
+
+This is the whole point of the demo, so be explicit about it. WWDC code samples are deliberately
+fragmentary — a struct on one slide, a lone method on another, no entry point, no connective
+tissue — because they're built to fit on screen, not to run. **Do not transcribe those fragments
+into `Demo.swift`.** Instead:
+
+1. **Learn the API first.** Use the transcript to understand *intent*, then deepen it with the
+   linked resources you can actually read (GitHub READMEs, swift.org articles, sample-code repos)
+   and your own knowledge of how the framework fits together. Understand the real flow — how the
+   types relate, what order calls happen in, what each piece is for — before writing anything.
+2. **Invent a small, plausible scenario** that an experienced dev would recognize as a realistic
+   use of the framework (e.g. for SwiftData, a tiny app with two related models and a list view —
+   not five isolated declarations). The scenario is the spine that makes the APIs make sense
+   together.
+3. **Wire the session's APIs into that scenario correctly**, adding the obvious connective tissue
+   the slides omitted (initializers, an `App`/entry point, sample data, the call sequence) so the
+   thing is coherent and runnable end-to-end.
+
+If the result looks like the slides reordered, you haven't done the job. If it looks like a
+minimal real app/feature that happens to showcase the API, you have.
+
 ## The quality bar
 
 The audience is experienced, so the demo must be *real*, not `print("hello")`:
@@ -34,13 +56,18 @@ The audience is experienced, so the demo must be *real*, not `print("hello")`:
 - **Self-contained and paste-ready.** A single `Demo.swift` by default. State at the top
   exactly where it runs (SwiftUI `App`, a Playground, an Xcode preview, a command-line
   executable) and any package dependency with its SwiftPM line.
-- **Minimal but complete.** Enough to compile and demonstrate the API end-to-end, nothing more.
-  Cut unrelated scaffolding.
+- **Minimal but complete.** Enough to compile and demonstrate the API end-to-end through the
+  scenario, nothing more. Cut unrelated scaffolding.
 - **Commented at the decision points** — not line-by-line, but where the new API does something
   non-obvious, say why.
-- **Grounded.** Every API call must come from the transcript or the linked docs. If you're
-  inferring a signature you couldn't confirm, mark it with a `// NOTE: verify — inferred` comment
-  rather than presenting a guess as fact.
+- **Accurate, and honest where it isn't.** Synthesizing the *scenario and structure* is expected
+  and encouraged — that's not "making things up." What you must not do is fabricate **API surface**:
+  signatures, parameter names, types, or availability that don't exist. Base every actual API call
+  on the transcript, the readable linked resources, or well-established framework knowledge — and
+  if you correct something the session got wrong (like a wrong parameter shape), say so. Where you
+  genuinely can't confirm a signature (e.g. the only source was a JavaScript-gated Apple doc), use
+  your best-known form and flag it with a `// NOTE: verify — inferred` comment rather than passing
+  a guess off as fact. An honest flag beats a confident error in code a developer will copy.
 
 ## Honesty about verification
 

@@ -110,8 +110,16 @@ varies by type.
 Use the demo decision rule and the Swift quality bar in `references/demo-guide.md`. The
 short version: build a demo when there's a concrete API a developer would want to *run* to
 understand (types 1, and sometimes 2 and 5). Don't build one for conceptual/design sessions
-or IDE-only tooling. A demo is a single self-contained `Demo.swift` by default — real,
-idiomatic, compile-ready Swift, not a toy.
+or IDE-only tooling.
+
+**The demo is a real use-case, not the session's snippets reassembled.** WWDC samples are
+fragmentary by design (they fit on a slide). First *learn* how the API actually fits together —
+from the transcript, the readable linked resources, and solid framework knowledge — then invent
+a small, plausible scenario and wire the session's APIs into it correctly, adding the connective
+tissue (init, entry point, sample data, call order) the slides leave out. The result should read
+like a minimal real app/feature that showcases the API end-to-end — a single self-contained,
+idiomatic `Demo.swift` by default. Synthesizing the scenario is expected; fabricating API surface
+(signatures, parameters, availability) is not — see the quality bar in the reference.
 
 **Be honest about verification.** There's no Xcode or iOS simulator here, so generated
 Swift can't be compiled or run. Present demo code as a high-quality, ready-to-paste
