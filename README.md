@@ -1,19 +1,40 @@
 # WWDC Session Decoder
 
-A skill for Claude Code and Claude Cowork that turns any Apple WWDC developer session into a fast, practical brief — what's new, the API surface, real code, migration impact, and gotchas — plus a runnable Swift demo when the session warrants one.
+A skill for Codex, Claude Code, and Claude Cowork that turns any Apple WWDC developer session into a fast, practical brief — what's new, the API surface, real code, migration impact, and gotchas — plus a runnable Swift demo when the session warrants one.
 
 Built for iOS/macOS engineers who don't have time to watch all 100+ WWDC sessions but still need to know which ones matter and what to do about them. Give it a session link (or just a title or number) and it produces a peer-level brief written for someone who already knows Swift.
 
 ```text
 You:  catch me up on the Meet SwiftData session and show me the code
 
-Claude:  → fetches the session page (transcript + code samples)
-         → classifies it as a new-API session
-         → writes brief.md  (verdict, mental model, API surface, gotchas)
-         → writes Demo.swift (a runnable SwiftUI app exercising the API)
+Agent: → fetches the session page (transcript + code samples)
+       → classifies it as a new-API session
+       → writes brief.md  (verdict, mental model, API surface, gotchas)
+       → writes Demo.swift (a runnable SwiftUI app exercising the API)
 ```
 
 ## Installation
+
+The same repo folder works for both Codex and Claude. `SKILL.md` is the shared entry point,
+`references/` holds the reusable workflow details, and `agents/openai.yaml` adds Codex-facing
+UI metadata while being harmless for Claude installs.
+
+### Codex
+
+Clone directly into Codex's skills directory:
+
+```bash
+mkdir -p "${CODEX_HOME:-$HOME/.codex}/skills"
+git clone https://github.com/pratikg29/wwdc-session-decoder.git "${CODEX_HOME:-$HOME/.codex}/skills/wwdc-session-decoder"
+```
+
+Or, if you already have this repo cloned, copy the skill in:
+
+```bash
+install_dir="${CODEX_HOME:-$HOME/.codex}/skills/wwdc-session-decoder"
+mkdir -p "$install_dir"
+cp -R SKILL.md references agents "$install_dir"/
+```
 
 ### Claude Code
 
@@ -28,7 +49,7 @@ Or, if you already have this repo cloned, copy the skill in:
 
 ```bash
 mkdir -p ~/.claude/skills/wwdc-session-decoder
-cp -r SKILL.md references ~/.claude/skills/wwdc-session-decoder/
+cp -R SKILL.md references agents ~/.claude/skills/wwdc-session-decoder/
 ```
 
 ### Claude Cowork
@@ -146,6 +167,8 @@ wwdc-session-decoder/
 │   ├── session-types.md      # the 5-type classifier and routing rules
 │   ├── brief-template.md     # the triage header + per-type brief templates
 │   └── demo-guide.md         # when to build a demo + the Swift quality bar
+├── agents/
+│   └── openai.yaml           # Codex/OpenAI UI metadata
 ├── examples/                 # real, unedited sample output from the skill
 │   └── wwdc2023-10187-meet-swiftdata/
 │       ├── brief.md

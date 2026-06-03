@@ -1,0 +1,5 @@
+interface:
+  display_name: "WWDC Session Decoder"
+  short_description: "Decode Apple WWDC sessions into practical briefs"
+  default_prompt: "Use $wwdc-session-decoder to decode a WWDC session into a practical engineer brief."
+
