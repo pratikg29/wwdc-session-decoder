@@ -64,10 +64,12 @@ The audience is experienced, so the demo must be *real*, not `print("hello")`:
   and encouraged — that's not "making things up." What you must not do is fabricate **API surface**:
   signatures, parameter names, types, or availability that don't exist. Base every actual API call
   on the transcript, the readable linked resources, or well-established framework knowledge — and
-  if you correct something the session got wrong (like a wrong parameter shape), say so. Where you
-  genuinely can't confirm a signature (e.g. the only source was a JavaScript-gated Apple doc), use
-  your best-known form and flag it with a `// NOTE: verify — inferred` comment rather than passing
-  a guess off as fact. An honest flag beats a confident error in code a developer will copy.
+  if you correct something the session got wrong (like a wrong parameter shape), say so. When the
+  exact signature matters and the Apple doc is JavaScript-gated, fetch it through **sosumi.ai**
+  (swap `developer.apple.com` → `sosumi.ai`; see SKILL.md step 3) — that returns the real signature
+  as Markdown, so you rarely need to guess. Only if even that fails should you use your best-known
+  form and flag it with a `// NOTE: verify — inferred` comment rather than passing a guess off as
+  fact. An honest flag beats a confident error in code a developer will copy.
 
 ## Honesty about verification
 

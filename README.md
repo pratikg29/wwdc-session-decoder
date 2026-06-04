@@ -155,7 +155,7 @@ The full, unedited output of this run lives in [`examples/`](./examples) — rea
 ## Limitations
 
 - **Demos aren't compiled.** There's no Xcode/Swift toolchain in the skill's environment, so generated Swift is a high-quality, ready-to-paste *starting point* — build it in Xcode. The skill says so explicitly and never claims otherwise.
-- **Apple documentation pages are JavaScript-rendered.** A plain fetch of a `developer.apple.com/documentation/...` page returns an empty shell. The skill relies on the (server-rendered) session transcript and code samples as ground truth, prefers non-Apple-doc resources (GitHub READMEs, swift.org) when it needs exact signatures, and won't invent API details to fill a gap.
+- **Apple documentation pages are JavaScript-rendered** (a plain fetch returns an empty "requires JavaScript" shell). The skill works around this by fetching docs through [sosumi.ai](https://sosumi.ai) — it swaps `developer.apple.com` for `sosumi.ai` and gets the real API surface back as Markdown. The session transcript and on-page code samples remain the primary ground truth, and the skill won't invent API details to fill a gap. *(Optional: connect the sosumi MCP — `claude mcp add --transport http sosumi https://sosumi.ai/mcp` — to let the skill **search** Apple docs, not just fetch a known URL. The skill falls back to the zero-setup host swap when it's not connected.)*
 - **Best on developer/technical sessions** — framework, API, tooling, and design talks — not keynotes or business-track sessions.
 
 ## Repository structure
@@ -187,6 +187,7 @@ Contributions welcome. Useful additions: more session-type test cases in `evals/
 
 ## Version history
 
+- **1.1.0** — Added a [sosumi.ai](https://sosumi.ai) fallback for Apple's JavaScript-rendered documentation, so the skill can pull exact API signatures, parameter names, and availability instead of working around the gap.
 - **1.0.0** — Initial release. Five-type session classifier, per-type brief templates, adaptive demo generation, and a tuned trigger description (validated against an output-quality eval set and a triggering eval set).
 
 ## License

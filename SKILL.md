@@ -74,7 +74,8 @@ fetch returns, in plain text:
 
 You do not need to process the video. The transcript + code samples are the ground truth.
 Ground every claim in them — **do not invent APIs, signatures, or availability** that
-aren't supported by the page or the linked docs.
+aren't supported by the page or the linked docs. (If a session page ever fails to fetch,
+sosumi.ai mirrors it too — see step 3 for the host swap.)
 
 ### 3. Pull 1–2 linked resources when accuracy matters
 
@@ -85,18 +86,35 @@ confirm names and availability. Skip this for conceptual sessions where there's 
 
 **Important — Apple documentation pages are JavaScript-rendered.** A plain fetch of a
 `developer.apple.com/documentation/...` URL returns an empty shell that just says "This page
-requires JavaScript", not the actual content. So:
+requires JavaScript", not the actual content. When you need the exact API surface — signatures,
+parameter names, `@available` — use these in order:
 
-- The **session page itself fetches fine** (it's server-rendered) — its transcript and on-page
-  code samples are your primary ground truth and are usually enough.
-- For the linked docs, prefer **non-Apple-doc resources**, which fetch normally: GitHub READMes
-  (e.g. open-source Swift packages), swift.org articles, and sample-code repos.
-- If you genuinely need an Apple `documentation` page and a JavaScript-capable browser tool is
-  available (e.g. a Chrome/browser MCP that renders pages), use it to read the rendered page.
-- If you can't get the doc, **do not invent signatures, parameter names, or availability to
-  fill the gap.** Build the brief from the transcript + on-page samples, and add a one-line note
-  pointing the reader to the official doc for exact API details. An honest gap beats a confident
-  guess — this is API reference material developers will copy.
+1. **sosumi.ai — the reliable fix.** sosumi.ai mirrors Apple's developer site and returns clean,
+   AI-readable Markdown (with real signatures). Just swap the host — change `developer.apple.com`
+   to `sosumi.ai`, keeping the path identical — and fetch that:
+   - Docs: `developer.apple.com/documentation/swiftdata` → `https://sosumi.ai/documentation/swiftdata`
+   - A specific symbol: `https://sosumi.ai/documentation/swiftdata/model()` (prefer the symbol's own
+     page over the framework index — index pages are huge)
+   - HIG: `developer.apple.com/design/...` → `https://sosumi.ai/design/...`
+   - WWDC video transcript: `.../videos/play/wwdc2023/10187` → `https://sosumi.ai/videos/play/wwdc2023/10187`
+   - External Swift-DocC (GitHub Pages, Swift Package Index): `https://sosumi.ai/external/<full-https-url>`
+2. **Non-Apple-doc resources** also fetch normally — GitHub READMEs (open-source Swift packages),
+   swift.org articles, sample-code repos. Good for the third-party frameworks a session leans on.
+3. **The session page itself fetches fine** (it's server-rendered); its transcript and on-page code
+   samples are your primary ground truth and are often enough on their own.
+
+**Optional — the sosumi MCP (for *searching* docs, not just fetching a known URL).** The host-swap
+above needs no setup and is the default. But if a sosumi MCP server is connected (`https://sosumi.ai/mcp`),
+prefer its tools — especially when you don't already have the exact doc URL:
+`searchAppleDocumentation(query)` to find the right page, then `fetchAppleDocumentation(path)`,
+`fetchAppleVideoTranscript(path)`, or `fetchExternalDocumentation(url)` to pull clean Markdown. To
+enable it in Claude Code: `claude mcp add --transport http sosumi https://sosumi.ai/mcp`. If it isn't
+connected, just use the host swap — don't ask the user to set it up mid-task.
+
+Only if none of these work: **do not invent signatures, parameter names, or availability to fill
+the gap.** Build the brief from the transcript + on-page samples and add a one-line note pointing
+the reader to the official doc. An honest gap beats a confident guess — this is API reference
+material developers will copy.
 
 ### 4. Classify, then write the brief
 
